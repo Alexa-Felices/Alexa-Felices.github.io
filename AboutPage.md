@@ -1,6 +1,6 @@
-layout: page
-title: "About Alexa Felices"
-permalink: /about/contact
+layout: page  
+title: "About Alexa Felices"  
+permalink: /about/contact  
 
 # About Alexa Felices  
 
