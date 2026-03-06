@@ -2,10 +2,10 @@ layout: page
 title: "About Alexa Felices"
 permalink: /about/contact
 
-# About Alexa Felices
+# About Alexa Felices  
 
 ## Contact Information
-**Email:** <alexa.h.felices@gmail.com>
+**Email:** <alexa.h.felices@gmail.com>  
 **Phone #:** 1-210-748-1723
 
 ## Education  
