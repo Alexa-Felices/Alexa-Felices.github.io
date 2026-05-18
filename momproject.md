@@ -10,14 +10,13 @@ Outliers were identified via K-Means clustering of raw data as seen here:
 
 <img src="images/clustering.jpg?raw=true"/> 
 
-With an optimal K derived from visual assessment of sklearn metrics: 
+Optimal K function for plotting Silhouette, Calinski-Harabasz, and Davies-Bouldin scores: 
 
 ```Python
 # Libraries needed
 import pandas as pd
 import re
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
-import matplotlib.pyplot as plt
 
 # Loaded data
 df = pd.read_csv(r'C:\Users\dinos\PycharmProjects\MOMAnalysis\data\PRAMS_MCH_Indicators_2016_2021_Final.csv')
@@ -59,18 +58,7 @@ def find_optimal_k(data):
 
     return df_scores, labels_kmeans, fitted_kmeans
 
-# Plot k-optimization metrics for Kmeans
-info = find_optimal_k(df)
-scores = info[0]
-scores['silhouette_score'].plot()
-plt.title('Silhouette Score vs. K')
-plt.show()
-scores['calinski_harabasz_score'].plot()
-plt.title('Calinski-Harabasz Score vs. K')
-plt.show()
-scores['davies_bouldin_score'].plot()
-plt.title('Davies-Bouldin Score vs. K')
-plt.show()
+# Can then plot the scores as shown by accessing the df_scores dict
 
 ```
 
