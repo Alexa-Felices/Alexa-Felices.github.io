@@ -2,9 +2,9 @@
 
 ---
 
-### Category Name 1 
+### Data Science Projects 
 
-[Project 1 Title](/sample_page)
+[Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/sample_page)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
