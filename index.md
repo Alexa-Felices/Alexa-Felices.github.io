@@ -4,7 +4,7 @@
 
 ### Data Science Projects 
 
-[Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject)
+[Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
