@@ -8,7 +8,7 @@
 
 Outliers were identified via K-Means clustering of raw data as seen here:
 
-<img src="images/dummy_thumbnail.jpg?raw=true"/> 
+<img src="images/clustering?raw=true"/> 
 
 With an optimal K derived from visual assessment of sklearn metrics: 
 
@@ -74,9 +74,9 @@ plt.show()
 
 ```
 
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
-
 Optimal K for K-Nearest-Neighbor imputation was also derived via the elbow method:
+
+<img src="images/OptimalK_MOM_Analysis?raw=true"/>
 
 ```Python
 # Libraries needed
@@ -120,8 +120,6 @@ plt.title('Elbow Method for Finding Optimal K')
 plt.axvline(x=10, linestyle='--', color='red', label="Optimal K (Elbow Point)")
 plt.show()
 ```
-
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ### 1. Statistical significance of maternal indicators
 
