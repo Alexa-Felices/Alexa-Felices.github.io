@@ -12,7 +12,7 @@ Outliers were identified via K-Means clustering of raw data as seen here:
 
 With an optimal K derived from visual assessment of sklearn metrics: 
 
-```javascript
+```Python
 # Libraries needed
 import pandas as pd
 import re
@@ -78,7 +78,7 @@ plt.show()
 
 Optimal K for K-Nearest-Neighbor imputation was also derived via the elbow method:
 
-```javascript
+```Python
 # Libraries needed
 import pandas as pd
 import re
