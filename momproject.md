@@ -2,7 +2,7 @@
 
 **Project description:** Increasing maternal mortality in the U.S. is an ongoing problem that health officials and researchers are eager to address. There are few studies that focus specifically on maternal mortality, and this project aims to drive that focus by identifying key areas of interest and proposing future work that could make prediction and prevention of maternal mortality a reality.
 
-**Data Summary:** This project uses the dataset found here: [Maternal indicators in US States - Kaggle](https://www.kaggle.com/datasets/neharana404/maternal-indicators-in-us-states2016-2021), and the data was explored and analyzed using the sklearn and statsmodels libraries in Python. This dataset consists of 167 columns, which include maternal deaths in the form of counts/100,000, year of measurement, US state, and various maternal indicators such as BMI, prenatal usage, insurance coverage, and more. There are 226 rows, and upon routine exploration, many missing values that were addressed via K-Nearest-Neighbor imputation where appropriate or removed in the case of the response (Deaths/100,000). For this project, 33 numerical features were identified as potential contributors to maternal death and used in developing a generalized linear poisson regression with Deaths/100,000 as the response, while the categorical and temporal features (State / Year) were used for data visualization and review.
+**Data Summary:** This project uses the dataset found here: [Maternal indicators in US States - Kaggle](https://www.kaggle.com/datasets/neharana404/maternal-indicators-in-us-states2016-2021), and the data was explored and analyzed using the sklearn and statsmodels libraries in Python. For this project, 33 numerical features were identified as potential contributors to maternal death and used in developing a generalized linear poisson regression with Deaths/100,000 as the response, while the categorical and temporal features (State / Year) were used for data visualization and review.
 
 ### 1. Outlier Identification and Missing Value Handling
 
@@ -12,7 +12,7 @@ Outliers were identified via K-Means clustering of raw data as seen here:
 
 Optimal K function for plotting Silhouette, Calinski-Harabasz, and Davies-Bouldin scores: 
 
-```Python
+```python
 # Libraries needed
 import pandas as pd
 import re
@@ -66,7 +66,7 @@ Optimal K for K-Nearest-Neighbor imputation was also derived via the elbow metho
 
 <img src="images/OptimalK_MOM_Analysis.png?raw=true"/>
 
-```Python
+```python
 # Libraries needed
 import pandas as pd
 import re
