@@ -69,7 +69,7 @@ Optimal K for K-Nearest-Neighbor imputation was also derived via the elbow metho
 
 <img src="images/OptimalK_MOM_Analysis.png?raw=true"/>
 
-```python
+```python <div width=1000></div>
 # Libraries needed for deriving optimal K for KNN
 import pandas as pd
 import re
