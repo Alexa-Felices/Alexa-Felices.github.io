@@ -5,7 +5,7 @@
 ### Data Science Projects 
 
 [Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md)
-(/images/FinalProjectChart_DTSA5304 (1).html)
+[Example](/images/FinalProjectChart_DTSA5304 (1).html)
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
