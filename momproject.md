@@ -12,7 +12,7 @@ Outliers were identified via K-Means clustering of raw data as seen here:
 
 Optimal K function for plotting Silhouette, Calinski-Harabasz, and Davies-Bouldin scores: 
 
-```python
+```python <div style="width: 1000px;"></div>
 # Libraries needed for function
 import pandas as pd
 import re
@@ -69,7 +69,7 @@ Optimal K for K-Nearest-Neighbor imputation was also derived via the elbow metho
 
 <img src="images/OptimalK_MOM_Analysis.png?raw=true"/>
 
-```python <div width=1000></div>
+```python <div style="width: 1000px;"></div>
 # Libraries needed for deriving optimal K for KNN
 import pandas as pd
 import re
