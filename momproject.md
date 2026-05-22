@@ -13,13 +13,13 @@ Outliers were identified via K-Means clustering of raw data as seen here:
 Optimal K function for plotting Silhouette, Calinski-Harabasz, and Davies-Bouldin scores: 
 
 ```python
-# Libraries needed
+# Libraries needed for function
 import pandas as pd
 import re
 from sklearn.metrics import silhouette_score, calinski_harabasz_score, davies_bouldin_score
 
-# Loaded data
-df = pd.read_csv(r'C:\Users\dinos\PycharmProjects\MOMAnalysis\data\PRAMS_MCH_Indicators_2016_2021_Final.csv')
+# Load data from Kaggle (downloaded locally as CSV file) and drop raw counts/confidence interval columns as well as NA values
+df = pd.read_csv(r'\MOMAnalysis\data\PRAMS_MCH_Indicators_2016_2021_Final.csv')
 df = df[df.columns.drop(list(df.filter(regex='Confidence Interval|Unweighted')))]
 df = df.rename(columns={'Site Name': 'State'})
 df = df.dropna()
@@ -61,13 +61,16 @@ def find_optimal_k(data):
 # Can then plot the scores as shown by accessing the df_scores dict
 
 ```
+Clustering against state with optimal K revealed the following outliers:
+
+<img src="images/outliers.png?raw=true"/>
 
 Optimal K for K-Nearest-Neighbor imputation was also derived via the elbow method:
 
 <img src="images/OptimalK_MOM_Analysis.png?raw=true"/>
 
 ```python
-# Libraries needed
+# Libraries needed for deriving optimal K for KNN
 import pandas as pd
 import re
 from sklearn.model_selection import train_test_split
@@ -75,23 +78,25 @@ from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import accuracy_score
 import matplotlib.pyplot as plt
 
-# Loaded data
-df = pd.read_csv(r'C:\Users\dinos\PycharmProjects\MOMAnalysis\data\PRAMS_MCH_Indicators_2016_2021_Final.csv')
+# Load data from Kaggle (downloaded locally as CSV file) and drop raw counts/confidence interval columns
+df = pd.read_csv(r'\MOMAnalysis\data\PRAMS_MCH_Indicators_2016_2021_Final.csv')
 df = df[df.columns.drop(list(df.filter(regex='Confidence Interval|Unweighted')))]
 df = df.rename(columns={'Site Name': 'State'})
 
-# Create KNN friendly df for finding optimal k (numerical data only)
+# Create KNN friendly dataframe for finding optimal K (numerical data only, no 'State' data)
 df_stateless = df.drop('State', axis=1)
 df_knn = df_stateless.dropna()
 
-# Use elbow method to determine optimal k (optimal k discovered was 10, added line to visualize)
+# Split data into response (y) and features (X) then 30% test and 70% training data
 X = df_knn.drop('Deaths/100000', axis=1)
 y = df_knn['Deaths/100000']
 
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=0)
 
+# Use elbow method to determine optimal K (optimal K discovered was 10, added line to visualize) by plotting error vs. K value
 k_values = range(1, 21)
 error_rates = []
+
 
 for k in k_values:
     knn = KNeighborsClassifier(n_neighbors=k)
@@ -100,6 +105,7 @@ for k in k_values:
     error_rate = 1 - accuracy_score(y_test, y_pred)
     error_rates.append(error_rate)
 
+# Plot results
 plt.figure(figsize=(8, 6))
 plt.plot(k_values, error_rates, marker='o')
 plt.xlabel('K Value')
@@ -107,6 +113,20 @@ plt.ylabel('Error Rate')
 plt.title('Elbow Method for Finding Optimal K')
 plt.axvline(x=10, linestyle='--', color='red', label="Optimal K (Elbow Point)")
 plt.show()
+
+# Impute NA values in numerical features (i.e., dataframe without 'State' data) with optimal K
+X = df_stateless.drop('Deaths/100000', axis=1)
+y = df_stateless['Deaths/100000']
+imputer = KNNImputer(n_neighbors=10, weights="uniform")
+X_imp = imputer.fit_transform(X)
+
+# Remove NA response values and outliers determined from clustering
+df_imp = pd.DataFrame(X_imp, columns=X.columns)
+df_imp['State'] = df['State']
+df_imp['Deaths/100000'] = y
+df_final = df_imp.dropna()
+df_final = df_final[~(df_final['Deaths/100000'] > 80)]
+states = pd.DataFrame(df_final['State'])
 ```
 
 ### 1. Statistical significance of maternal indicators
