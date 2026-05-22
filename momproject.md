@@ -12,7 +12,7 @@ Outliers were identified via K-Means clustering of raw data as seen here:
 
 Optimal K function for plotting Silhouette, Calinski-Harabasz, and Davies-Bouldin scores: 
 
-```python 
+```python <style="width: 1000px;">
 # Libraries needed for function
 import pandas as pd
 import re
