@@ -5,7 +5,7 @@
 ### Data Science Projects 
 
 [Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md)
-[Example](/example.html)
+[Example](Alexa-Felices.github.io/example.html)
 
 ---
 [Project 2 Title](/pdf/sample_presentation.pdf)
