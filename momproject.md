@@ -208,7 +208,7 @@ print(model_eval.to_string())
 
 The results of the iterations showed the following terms were dropped for lack of statistical significance:
 
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+<img src="images/pval_iter.jpg?raw=true"/>
 
 To further check if the kept terms produced the optimal model, I intialized a new saturated model with the remaining significant terms and checked the BIC again for improvement upon removing a term. By iterating through all possible combinations of terms, I arrived at a new reduced model that could be compared to the new saturated model.
 
@@ -217,7 +217,7 @@ To further check if the kept terms produced the optimal model, I intialized a ne
 sat_model_form = 'Maternal_deaths ~ X1 + X2 + X3 + ' \
                  'X4 + X5 + X6 + X7 + X8 + X9 + ' \
                  'X10 + X11 + X12 + X13 + X14 + X15 + ' \
-                 'X16 + X17 + X18 + X19 + X20 + X21 + X22 + X23'
+                 'X16 + X17 + X18'
 
 
 # Create a function for generating list of possible new reduced formulas given a saturated formula
@@ -288,22 +288,96 @@ new_model, new_formula, bic_dict, x_ref_new, bic_start = update_bic_dict(x_data_
 
 ```
 
-The best BIC was found when 5 additional features were removed from the model. However, because the BIC score improvement was <1 point compared to the previous BIC score, the newly saturated model with all 23 significant terms was determined to be the best possible model. The below table shows the optimal model and its coefficients.
+At the conclusion of this test, the newly saturated model with all 18 significant terms was still determined to be the best possible model. The below table shows the optimal model and its coefficients.
 
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+<img src="images/model_summary.jpg?raw=true"/>
 
 ### 3. Assessment and interpretation of saturated model
 
-```javascript
-if (isAwesome){
-  return true
-}
+To assess the final model's performance, I plotted the residual deviances and observed vs. fitted values using the below code. 
+
+```python
+# Dictionary of test.py data
+x_index = 1
+x_val_names = {'Maternal_deaths': y_test_f}
+x_cols = X_test_f.columns
+n_x = len(X_test_f)
+for x_col in x_cols:
+    x_val_names[f'X{x_index}'] = np.array(X_test_f[x_col])
+    x_index += 1
+
+# Predicted Values
+test_fitted = model_for_prediction.fit().predict(exog=x_val_names)
+sample_mean = sum(test_fitted) / n_x
+sample_std = statistics.stdev(test_fitted)
+test_residuals = []
+acc_calc = []
+prec_calc = []
+dss = []
+log_test_fitted = []
+
+for i_sum in range(n_x):
+    log_test_fitted += [log(test_fitted.iloc[i_sum]+1)]
+    test_residuals += [y_test_f.iloc[i_sum] - test_fitted.iloc[i_sum]]
+    prec_calc += [(log(y_test_f.iloc[i_sum]+1) - log(test_fitted.iloc[i_sum]+1)) ** 2]
+    dss += [((y_test_f.iloc[i_sum] - sample_mean) / sample_std) ** 2 + 2 * log(sample_std)]
+
+test_residuals = np.array(test_residuals)
+
+
+def calculate_deviances(y_obs, y_pred_mu):
+    y_obs = np.asarray(y_obs)
+    y_pred_mu = np.asarray(y_pred_mu)
+
+    log_ratio = np.zeros_like(y_obs, dtype=float)
+    non_zero_indices = y_obs > 0
+    log_ratio[non_zero_indices] = np.log(y_obs[non_zero_indices] / y_pred_mu[non_zero_indices])
+
+    dev_comp = 2 * (y_obs * log_ratio - (y_obs - y_pred_mu))
+
+    sign_diff = np.sign(y_obs - y_pred_mu)
+
+    dev_residuals = sign_diff * np.sqrt(np.maximum(dev_comp, 0))
+
+    return dev_residuals
+
+
+# Calculate deviance residuals
+y_pred_mu_array = np.full((n_x,), sample_mean)
+deviance_residuals = calculate_deviances(y_test_f, y_pred_mu_array)
+
+# Plot residuals
+fig, axes = plt.subplots(1, 1, figsize=(8, 8))
+
+# Test Data
+axes.scatter(log_test_fitted, deviance_residuals, alpha=0.5)
+axes.axhline(y=0, color='r', linestyle='--')
+axes.set_title('Test Data Deviance Residuals vs. Log Fitted Values')
+axes.set_xlabel('Log Fitted Values')
+axes.set_ylabel('Deviance Residuals')
+
+plt.show()
+
+# Plot fitted vs. observed values
+fig, axes = plt.subplots(1, 1, figsize=(8, 8))
+axes.scatter(y_test_f, test_fitted, alpha=0.5)
+axes.axline([0, 0], slope=1, color='r', linestyle='--')
+axes.set_title('Observed Values vs. Fitted Values')
+axes.set_xlabel('Observed Values')
+axes.set_ylabel('Fitted Values')
+
+plt.show()
 ```
+<img src="images/deviances.jpg?raw=true"/> <img src="images/obs_fitted.jpg?raw=true"/>
 
-### 3. Support the selection of appropriate statistical tools and techniques
+These plots appear to show evidence of nonlinear behavior and heteroscedasticity, particularly at higher values of maternal death. This could indicate that there are other, confounding factors that are not accounted for or that one or more of the features present should be modeled non-linearly with regards to maternal deaths.
 
-<img src="images/dummy_thumbnail.jpg?raw=true"/>
+We can observe the results of the model to get an idea of what could have happened:
 
-### 4. Provide a basis for further data collection through surveys or experiments
+<img src="images/model_values.jpg?raw=true"/>
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. 
+Looking at the results from our model, we can see that some of the features have expected results: having a postpartum checkup, getting a flu shot prior to delivery, use of contraception, and getting teeth cleaned appear to reduce maternal deaths. However, there are also unexpected results; we see an decrease in maternal deaths with increased percentage of mothers who smoke during pregnancy or drink heavily just before pregnancy, and an increase with increased private insurance or Medicaid usage. There is also a yearly increase in maternal deaths, which may be responsible for the observed heteroscedasticity.
+
+### 4. Proposed future work
+
+Based on these results, there is some additional investigation that should be done. For instance, it's possible that the relationship seen between increased maternal deaths and increased insurance/Medicaid coverage is simply because more women have insurance/Medicaid than not, and so a higher proportion of deaths were attributed to these feature. We would need to conduct A/B testing to see whether or not insurance coverage (or lack thereof) had an appreciable impact to the mortality of pregnant women. The relationship with flu shots and postpartum checkups is interesting, and could be a path of future study. But it could also indicate that women who visit the doctor more often are less likely to experience adverse outcomes. 
