@@ -1,0 +1,17 @@
+---
+---
+
+@import "{{ site.theme }}";
+
+.wrapper {
+  width: 80%;
+  max-width: none;
+  margin: 0 auto;
+  padding: 50px 0;
+  position: static;
+}
+
+.wrapper > section {
+  width: 70%;
+  margin: 0 auto;
+}
