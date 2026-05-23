@@ -368,7 +368,7 @@ axes.set_ylabel('Fitted Values')
 
 plt.show()
 ```
-<img src="images/deviances.jpg?raw=true"/> <img src="images/obs_fitted.jpg?raw=true"/>
+<img src="images/deviances.png?raw=true"/> <img src="images/obs_fitted.png?raw=true"/>
 
 These plots appear to show evidence of nonlinear behavior and heteroscedasticity, particularly at higher values of maternal death. This could indicate that there are other, confounding factors that are not accounted for or that one or more of the features present should be modeled non-linearly with regards to maternal deaths.
 
