@@ -4,16 +4,16 @@
 
 ### Data Science Projects 
 
-[Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md)
-[Example](/example.html)
-
----
 [Project 2 Title](/pdf/sample_presentation.pdf)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
 
 ---
 [Project 3 Title](http://example.com/)
 <img src="images/dummy_thumbnail.jpg?raw=true"/>
+
+---
+[Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md) <img src="images/python.png?raw=true"/>
+Used maternal health indicator data from [Kaggle](https://www.kaggle.com/datasets/neharana404/maternal-indicators-in-us-states2016-2021/code) to develop a generalized linear model with number of maternal deaths/100k as the response in order to explore the statistical significance of the collected health indicators. Interesting findings include: statistically significant reduction in maternal death with increased flu shot vaccination and postpartum health visits, as well as increased mortality with tobacco use postpartum. Techniques used to explore and clean the data include K-means clustering to identify outliers and K-Nearest-Neighbors imputation for missing values handling.
 
 ---
 
