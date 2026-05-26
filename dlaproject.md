@@ -47,7 +47,7 @@ Using pandas, I loaded the json file and inspected the data header.
 reviews = pd.read_json("drive/MyDrive/news_category_trainingdata.json")
 reviews.head()
 ```
-(image here)
+<img src="images/dla_head.jpg?raw=true"/> 
 
 ### 3. Prepare Data for Modeling
 Here, I combined the headline + description into one string for ease of parsing in the machine learning package. Then, I created a "health_wellness" column in the dataset and used numpy to generate values indicating "1" for "Healthy Living" articles and "0" for articles outside of that category. Finally, I used the describe() method on the column to find how many articles in the set are considered "Healthy Living".
@@ -59,7 +59,7 @@ reviews['healthy'] = np.where((reviews['category'] == 'HEALTHY LIVING'), 1, 0)
 
 reviews['healthy'].describe()
 ```
-(image here)
+<img src="images/dla_describe1.jpg?raw=true"/>
 
 From this result, I can conclude that I need to balance the data, as the mean is much closer to 0 than 1, indicating there are very few "healthy" (~3%) articles relative to the number of "not healthy" articles.
 
@@ -79,7 +79,7 @@ review_sample = pd.concat([health_wellness,not_health_wellness])
 #Describe set
 review_sample.describe()
 ```
-(image here)
+<img src="images/dla_describe2.jpg?raw=true"/>
 
 Again, this demonstrates that balancing the data was necessary. The new dataset only contains 13k articles, as opposed to the original 200k.
 
@@ -103,7 +103,7 @@ train, val, preprocess = ktrain.text.texts_from_df(
     verbose=1
 )
 ```
-(image here)
+<img src="images/dla_params.jpg?raw=true"/>
 
 ```python
 #Model learner tuning
@@ -113,13 +113,13 @@ learner = ktrain.get_learner(model, train_data=train, val_data=val, batch_size=1
 #Run learning epochs
 learner.lr_find(max_epochs=6)
 ```
-(image here)
+<img src="images/dla_epochs.jpg?raw=true"/>
 
 ```python
 #Learner plot display
 learner.lr_plot()
 ```
-(image here)
+<img src="images/dla_learner.jpg?raw=true"/>
 
 Based on the learner plot, I should set the log learning rate to the minimum validation loss at approximately 1e-4. Now, I can use the tuned learner to train the best model. With early stopping, the model should stop sooner than 10 epochs, but I set the limit in case the model does not converge.
 
@@ -132,7 +132,7 @@ history=learner.autofit(
     early_stopping=True
 )
 ```
-(image here)
+<img src="images/dla_training.jpg?raw=true"/>
 
 I then saved the predictor for later reloading, and printed the validation metrics so that I could assess the model's performance.
 
@@ -144,7 +144,7 @@ predictor_trial_1.save("drive/MyDrive/trial1.healthy_living")
 #Validation metrics for training
 validation = learner.validate(val_data=val, print_report=True)
 ```
-(image here)
+<img src="images/dla_metrics1.jpg?raw=true"/>
 
 The learner validation score shows that recall and precision are 90% and 85%, respectively, for the "healthy" articles for this set - this indicates that the model was able to identify 90% of the true positives from the dataset and 85% of the total identified as "healthy" were actually "healthy" articles. In order to maximize the hypothetical customer's reach, I would want to increase the model's ability to accurately identify "healthy" articles, which may mean adjusting the training sample to more closely reflect the mix in the total articles.
 
@@ -167,7 +167,7 @@ review_sample_new = pd.concat([healthy_new,not_healthy_new])
 #Describe set
 review_sample_new.describe()
 ```
-(image here)
+<img src="images/dla_describe3.jpg?raw=true"/>
 
 I repeated the same steps as with the first trial and achieved the following results:
 
@@ -179,7 +179,7 @@ predictor_trial_2.save("drive/MyDrive/trial2.healthy_living")
 #Validation of new learner
 validation = learner.validate(val_data=val, print_report=True)
 ```
-(image here)
+<img src="images/dla_metrics2.jpg?raw=true"/>
 
 Given these two results, it seemed that the sample composition needed further adjustment. I ran a third trial with 45% non-healthy and 55% healthy articles.
 
@@ -199,7 +199,7 @@ review_sample_new = pd.concat([healthy_new,not_healthy_new])
 #Describe set
 review_sample_new.describe()
 ```
-(image here)
+<img src="images/dla_describe4.jpg?raw=true"/>
 
 And used the same process as the first trial, getting the following results:
 
@@ -211,7 +211,7 @@ predictor_trial_3.save("drive/MyDrive/trial3.healthy_living")
 #Validation of new learner
 validation = learner.validate(val_data=val, print_report=True)
 ```
-(image)
+<img src="images/dla_metrics3.jpg?raw=true"/>
 
 ### Conclusion
 
