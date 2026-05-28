@@ -6,5 +6,7 @@
 
 ### Creating a Waffle Chart to Visualize Total Energy Production from 2000 to 2024
 
-This visualization uses pywaffle, a library that partners with matplotlib to create waffle charts, which can help guide the human eye to more easily compare values from multiple categories and are generally more eye-catching than traditional stacked bar charts. While these graphs tend to shine with 3-4 categories, I thought to first look at what the chart looked like with all 9 categories of energy production from this data.
+This visualization uses pywaffle, a library that partners with matplotlib to create waffle charts, which can help guide the human eye to more easily compare values from multiple categories and are generally more eye-catching than traditional stacked bar charts. While these graphs tend to shine with 3-4 categories, I thought to first look at what the chart looked like with all 9 categories of energy production from this data. [Code](/waffle.md)
+
+<img src="images/renewables.png?raw=true"/> 
 
