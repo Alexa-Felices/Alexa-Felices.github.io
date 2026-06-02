@@ -14,8 +14,8 @@ Based on this chart, we can quickly see that the overall production of energy fr
 
 ### Creating an Interactive Bar Chart to Show a Specific Country's Contribution to 2024 Energy Production
 
-This visualization uses altair to create an [interactive bar chart](/country_energy_split.html) that lets the user view both the 2000-2024 trend for a specific country and that country's 2024 energy production mix. A line graph also lets us see at a glance whether the energy production increase over time is a function of population growth. Below is an example of one country selected from the mix:
+This visualization uses altair to create an [interactive bar chart](/country_energy_split.html) that lets the user view both the 2000-2024 trend for a specific country and that country's 2024 energy production mix. A line graph also lets us see at a glance whether the energy production increase over time is a function of population growth. Below are two examples of a selected country:
 
 <img src="images/iceland_graph.jpg" width ="1000" height="500"/> <img src="images/china_graph.jpg" width ="1000" height="500"/> [Code](/interactive.md)
 
-These charts let us quickly view and compare different countries. We can see that some countries, like Iceland, have doubled their production while relying solely on renewable sources in 2024. This can help the user explore how each country contributes to the overall energy production mix and drive additional questions for exploration, such as, what could have driven the increased energy production in China if population increase has been relatively flat?
+These charts let us quickly view and compare different countries. We can see that some countries, like Iceland, have doubled their production while relying solely on renewable sources in 2024. This can help the user explore how each country contributes to the overall energy production mix and drive additional questions for exploration, such as, what could have driven the drastically increased energy production in China if population increase has been relatively flat?
