@@ -11,6 +11,9 @@ from highlight_text import fig_text
 # Read in data from local storage
 df = pd.read_csv('data/renewable_energy_share_2000_2025.csv')
 
+# Remove aggregated values (iso code = NA)
+df = df.dropna(subset=['iso_code'])
+
 # Remove 2025 data, convert year to datetime
 df['Year'] = pd.to_datetime(df['year'], format='%Y').dt.year
 df = df[df['Year'] != 2025]
@@ -70,7 +73,7 @@ n_cols = df_total_energy_final['Year'].nunique()
 fig, axs = plt.subplots(ncols=n_cols, figsize=(12, 8))
 
 # Add y scale (pywaffle does not build it automatically)
-y_ticks = [0, 30000, 60000, 90000, 120000, 150000, 180000, 210000]
+y_ticks = [0, 10000, 20000, 30000, 40000]
 for y_tick in y_ticks:
     axs[0].text(
         x=-0.25,
@@ -112,7 +115,7 @@ for year, ax in zip(df_total_energy_final['Year'].unique(), axs):
         ax.text(
             x=0.099,
             y=sum(values[:-1]) / max_year_value + adj_y,
-            s=f"{sum(values[:-1]):3g}"[:-3]+"K",
+            s=f"~{sum(values[:-1]):3g}"[:-3]+"K",
             fontsize=12,
             ha="center",
             font=italfont,
