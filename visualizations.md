@@ -16,7 +16,7 @@ Based on this chart, we can quickly see that the overall production of energy fr
 
 This visualization uses altair to create an interactive bar chart that lets the user view both the 2000-2024 trend for a specific country and that country's 2024 energy production mix. A line graph also lets us see at a glance whether the energy production increase over time is a function of population growth. Screenshots of a few countries are included as examples below:
 
-<img src="images/china_graph.jpg" width ="600" height="500"/> <img src="images/us_graph.jpg" width ="600" height="500"/> <img src="images/iceland_graph.jpg" width ="600" height="500"/> [Code](placeholder)
+<img src="images/china_graph.jpg" width ="600" height="500"/> <img src="images/us_graph.jpg" width ="600" height="500"/> <img src="images/iceland_graph.jpg" width ="600" height="500"/> [Code](/interactive.md)
 
 These charts let us quickly view and compare different countries. We can see that some countries, like Iceland, have doubled their production while relying solely on renewable sources in 2024. Or that some, like China, have drastically increased their energy production and still heavily use non-renewable sources like coal. We can also see that some countries, like the US, had relatively steady energy production despite population growth. This can help the user explore how each country contributes to the overall energy production mix shown in the previous chart.
 
