@@ -8,8 +8,7 @@
 
 Used 2000-2025 renewable energy share data from [Kaggle](https://www.kaggle.com/datasets/elvisbui/renewable-energy-share-by-country-2000-2025) to build informative and eye-catching visualizations using a variety of python libraries such as pywaffle, altair, and matplotlib. Highlights of this project include:
   - Use of pandas to load, clean, and transform data for visualization
-  - Implementing visualizations in python via altair and matplotlib
-  - Using data to tell a story and draw conclusions from visualizations
+  - Implementing [interactive visualizations](/country_energy_split.html) via altair and static charts via matplotlib
 
 <img src="images/renewables.png" width ="600" height="500"/> <img src="images/china_graph.jpg" width ="600" height="500"/>
 
