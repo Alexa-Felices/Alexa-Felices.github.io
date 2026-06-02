@@ -10,7 +10,7 @@ Used 2000-2025 renewable energy share data from [Kaggle](https://www.kaggle.com/
   - Use of pandas to load, clean, and transform data for visualization
   - Implementing [interactive visualizations](/country_energy_split.html) via altair and static charts via matplotlib
 
-<img src="images/renewables.png" width ="800" height="500"/> <img src="images/china_graph.jpg" width ="1200" height="500"/>
+<img src="images/renewables.png" width ="800" height="600"/> <img src="images/china_graph.jpg" width ="1000" height="500"/>
 
 ---
 [Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md) <img src="images/python.png" width ="15" height="15" />
