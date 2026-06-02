@@ -11,7 +11,7 @@ Used 2000-2025 renewable energy share data from [Kaggle](https://www.kaggle.com/
   - Implementing visualizations in python via altair and matplotlib
   - Using data to tell a story and draw conclusions from visualizations
 
-<img src="images/renewables.png" width ="40" height="30"/>
+<img src="images/renewables.png" width ="150" height="120"/>
 
 ---
 [Understanding Trends in U.S. Maternal Outcome Measurements (M.O.M.)](/momproject.md) <img src="images/python.png" width ="15" height="15" />
